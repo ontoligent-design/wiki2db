@@ -2,6 +2,10 @@
 
 ## Notes Wikipedia Export Data
 
+## Important URLs
+
+* https://dumps.wikimedia.org/enwiki/latest/
+
 ### All file types in dump directory
 
 ```txt
