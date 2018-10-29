@@ -70,6 +70,14 @@ class Wiki2db:
                 print("File '{}' exists in db".format(row[0]))
                 pass
 
+    def get_files(self):
+        sql = "SELECT file_id, file_name, imported FROM file"
+        return self.db.execute(sql).fetchall()
+
+    def check_file_import_status(self, file_id):
+        sql = "SELECT imported FROM file WHERE file_id = ?"
+        return self.db.execute(sql, (file_id,)).fetchone()[0]
+
     def parse_page(self, page, src_file_id):
         root = ET.fromstring(page)
         values = [src_file_id]
