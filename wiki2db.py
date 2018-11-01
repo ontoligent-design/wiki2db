@@ -4,7 +4,7 @@ import os
 import re
 import sqlite3
 import xml.etree.ElementTree as ET
-
+#import sqlalchemy as sa
 
 class Wiki2db:
 
@@ -132,3 +132,5 @@ if __name__ == '__main__':
     w2b.add_files([src_file])
     w2b.import_xml_files()
 
+    #from sqlalchemy import create_engine
+    #e1 = create_engine('sqlite://test.db')
