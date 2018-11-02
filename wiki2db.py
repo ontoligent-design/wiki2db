@@ -36,6 +36,7 @@ class Wiki2db:
         self.fields = None
         self.generate_schema()
         self.create_tables()
+        self.set_node_handler(self.parse_page)
 
     def __del__(self):
         self.db.close()
@@ -96,11 +97,14 @@ class Wiki2db:
         cur.execute(self.sql['select_new_files'])
         src_files = [(row['file_id'], row['file_path']) for row in cur.fetchall()]
         for src_file in src_files:
-            self.import_xml(src_file[1], src_file[0], self.parse_page)
+            self.import_xml(src_file[1], src_file[0])
             cur.execute(self.sql['update_row_file'], (1, src_file[0]))
             self.db.commit()
 
-    def import_xml(self, src_file_path, src_file_id, node_handler=self.parse_page):
+    def set_node_handler(self, node_handler):
+        self.node_handler = self.parse_page
+
+    def import_xml(self, src_file_path, src_file_id):
         with open(src_file_path, 'r') as src:
             switch = page_n = 0
             lines = []
@@ -114,11 +118,10 @@ class Wiki2db:
                     switch = 0
                     lines.append(line)
                     page = ''.join(lines)
-                    node_handler(page, src_file_id)
+                    self.node_handler(page, src_file_id)
                     lines = []
                 if switch:
                     lines.append(line)
-
 
 if __name__ == '__main__':
 
