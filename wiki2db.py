@@ -3,7 +3,7 @@
 import re
 import sqlite3
 import xml.etree.ElementTree as ET
-
+#import sqlalchemy as sa
 
 class Wiki2db:
 
@@ -78,8 +78,8 @@ class Wiki2db:
         return self.db.execute(sql, (file_id,)).fetchone()[0]
 
     def parse_page(self, page, src_file_id):
-        root = ET.fromstring(page)
         values = [src_file_id]
+        root = ET.fromstring(page)
         for xpath in self.xpaths:
             try:
                 val = "".join(root.find(xpath).itertext())
