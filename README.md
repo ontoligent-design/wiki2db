@@ -6,7 +6,9 @@ it.
 
 ## Notes Wikipedia Export Data
 
-## Important URLs
+Some information about Wikipedia's XML export files.
+
+### Important URLs
 
 * https://dumps.wikimedia.org/enwiki/latest/
 
