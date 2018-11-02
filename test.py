@@ -1,32 +1,23 @@
 from wiki2db import Wiki2db
 
-
+# Specify a target database. Note that SQLite will
+# create the file if it does not exist.
 db_file = 'test.db'
-w2b = Wiki2db(db_file, verbose=True)
 
+# Create an instance of the Wiki2db object.
+w2b = Wiki2db(db_file)
+
+# Define one or more input files in 
+# Wikipedia's XML export format. Open the sample
+# file to see how these are structured.
 src_file = 'pages-articles-sample.xml'
+
+# Add the file name (provided in a list) to the database.
+# The file name is added to keep track of it in the case
+# when many files are being added.
 w2b.add_files([src_file])
+
+# Import the contents of the file into the database.
+# Once done, opent the SQLite database in your favorite
+# SQLite viewer, such as DB Browser or from the command line.
 w2b.import_xml_files()
-
-# page_n = 0
-# def grab_xml(page, src_file_id):
-#     global page_n
-#     page_n += 1
-#     with open('pages/page-{}.xml'.format(page_n), 'w') as out:
-#         out.write(page)
-# w2b.import_xml('pages-articles-sample.xml', 1, grab_xml)
-
-# file_name = file.split('/')[1]
-# file_name2 = re.sub(r'\.bz2$', '', file_name)
-# if not os.path.exists(file_name) and not os.path.exists(file_name2):
-#     print('Copying', file_name)
-#     os.system('cp {} ./{}'.format(file, file_name))
-# if not os.path.exists(file_name2):
-#     print('Uncompressing', file_name)
-#     os.system('bzip2 -d {}'.format(file_name))
-#     os.system('rm {}'.format(file_name))
-# print('Importing', file_name2)
-# import_xml(db_file, file_name2)
-# print('Deleting', file_name2)
-# os.system('rm {}'.format(file_name2))
-# print('Done with', file_name2)

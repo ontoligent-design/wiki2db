@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import os
 import re
 import sqlite3
 import xml.etree.ElementTree as ET
@@ -101,7 +100,7 @@ class Wiki2db:
             cur.execute(self.sql['update_row_file'], (1, src_file[0]))
             self.db.commit()
 
-    def import_xml(self, src_file_path, src_file_id, node_handler):
+    def import_xml(self, src_file_path, src_file_id, node_handler=self.parse_page):
         with open(src_file_path, 'r') as src:
             switch = page_n = 0
             lines = []
@@ -124,11 +123,8 @@ class Wiki2db:
 if __name__ == '__main__':
 
     # Do something like this:
-
     db_file = 'test.db'
     src_file = 'pages-articles-sample.xml'
-
     w2b = Wiki2db(db_file, verbose=True)
     w2b.add_files([src_file])
     w2b.import_xml_files()
-
