@@ -3,7 +3,7 @@
 import re
 import sqlite3
 import xml.etree.ElementTree as ET
-#import sqlalchemy as sa
+
 
 class Wiki2db:
 
@@ -83,7 +83,7 @@ class Wiki2db:
         root = ET.fromstring(page)
         for xpath in self.xpaths:
             try:
-                val = "".join(root.find(xpath).itertext())
+                val = ''.join(root.find(xpath).itertext())
             except AttributeError:
                 val = ''
             values.append(val)
