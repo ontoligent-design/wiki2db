@@ -1,5 +1,9 @@
 # wiki2db
 
+A simple library to migrate Wikipedia's XML export files into
+a SQLite database. See `test.py` for an example of how to use
+it.
+
 ## Notes Wikipedia Export Data
 
 ## Important URLs
